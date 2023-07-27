@@ -1,0 +1,73 @@
+* {
+    padding: 0; 
+    margin: 0; 
+    box-sizing: border-box;
+}
+body{
+/*1% of view port height*/
+    height: 100vh;
+    /*for centering .memory-game*/
+    display: flex;
+    background-image: url(https://i.postimg.cc/j5SDL9HN/rick-and-morty-uy-2560x1600.jpg);
+    background-size: cover;
+}
+
+.memory-game{
+    width: 640px;
+    height: 640px;
+    /*for centering .memory-game*/
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    /*3D effect  perspective is adding depth to elements */
+    perspective: 1000px;
+}
+
+.memory-card{
+    position: relative;
+    width: calc(25% - 10px);
+    height:calc(33.33% - 10px);
+    margin: 5px;
+/*for transition to work we need to have*/
+    transform: scale(1);
+    /*inserting memory card element to 3d perspective*/
+    transform-style: preserve-3d;
+    transition: transform .5s;
+}
+
+/*Adding Click efect on memory card*/
+.memory-card:active{
+/*scale down to 97% of original size*/
+    transform: scale(0.97);
+    transition: transform 0.8s;
+}
+
+/*Adding flip class no space between meory-card and flip class because there are on the same element*/
+.memory-card.flip {
+    transform: rotateY(180deg);
+}
+.front-face, .back-face {
+/*position absolute needs element with relativ position*/
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 3%;
+    background-color:#caa2b4;
+    border-radius: 5px;
+    /*hiding backface*/
+    backface-visibility: hidden;
+}
+.front-face{
+    transform: rotateY(180deg);
+}
+
+@media screen and (max-width: 300px) {
+    .memory-game{
+        width: 300px;
+        height: 300px;
+    }
+    
+    .front-face, .back-face {
+            padding: 1%;
+        }
+}
